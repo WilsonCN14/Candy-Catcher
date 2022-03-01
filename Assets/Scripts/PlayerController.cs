@@ -53,4 +53,17 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
         }
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Chocolate"))
+        {
+            Destroy(other.gameObject);
+        } else if (other.gameObject.CompareTag("Vegetable"))
+        {
+            Destroy(other.gameObject);
+        } else if (other.gameObject.CompareTag("Power up"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
