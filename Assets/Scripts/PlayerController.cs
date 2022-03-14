@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
     private Rigidbody playerRb;
     private float speed = 10.0f;
-    private float jumpForce = 200.0f;
-    private float xBound = 12.0f;
+    private float jumpForce = 150.0f;
+    private float xBound = 7.0f;
     private bool isOnGround = true;
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -58,12 +60,18 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Chocolate"))
         {
             Destroy(other.gameObject);
-        } else if (other.gameObject.CompareTag("Vegetable"))
+            gameManager.UpdateScore(10);
+            
+        } 
+        else if (other.gameObject.CompareTag("Candy"))
         {
             Destroy(other.gameObject);
-        } else if (other.gameObject.CompareTag("Power up"))
+            gameManager.UpdateScore(20);
+        } 
+        else if (other.gameObject.CompareTag("Vegetable"))
         {
             Destroy(other.gameObject);
-        }
+            gameManager.LostLife();
+        } 
     }
 }

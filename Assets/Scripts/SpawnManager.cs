@@ -6,27 +6,27 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject chocolate;
     public GameObject vegetable;
-    public GameObject powerup;
+    public GameObject candy;
     private float ySpawn = 13.0f;
-    private float xSpawnRange = 12.0f;
+    private float xSpawnRange = 7.0f;
     private float zSpawn = -3.0f;
 
-    private float chocolateSpawnTime = 2.0f;
-    private float vegetableSpawnTime = 3.0f;
-    private float powerupSpawnTime = 7.0f;
+    private float chocolateSpawnTime = 3.0f;
+    private float vegetableSpawnTime = 4.0f;
+    private float candySpawnTime = 7.0f;
     private float startDelay = 1.0f;
 
-    void Start()
+    // GameManager controls when objects start and stop spawning
+    public void StartSpawning() 
     {
-       InvokeRepeating("SpawnChocolate", startDelay, chocolateSpawnTime);
-       InvokeRepeating("SpawnVegetable", startDelay, vegetableSpawnTime);
-       InvokeRepeating("SpawnPowerup", startDelay, powerupSpawnTime);
+        InvokeRepeating("SpawnChocolate", startDelay, chocolateSpawnTime);
+        InvokeRepeating("SpawnVegetable", startDelay, vegetableSpawnTime);
+        InvokeRepeating("SpawnCandy", startDelay, candySpawnTime);
     }
 
-
-    void Update()
+    public void StopSpawning()
     {
-        
+        CancelInvoke();
     }
 
     void SpawnChocolate() 
@@ -45,11 +45,11 @@ public class SpawnManager : MonoBehaviour
         Instantiate(vegetable, spawnPos, vegetable.gameObject.transform.rotation);
     }
 
-    void SpawnPowerup() 
+    void SpawnCandy() 
     {
         float randomX = Random.Range(-xSpawnRange, xSpawnRange);
         Vector3 spawnPos = new Vector3(randomX, ySpawn, zSpawn);
 
-        Instantiate(powerup, spawnPos, powerup.gameObject.transform.rotation);
+        Instantiate(candy, spawnPos, candy.gameObject.transform.rotation);
     }
 }
